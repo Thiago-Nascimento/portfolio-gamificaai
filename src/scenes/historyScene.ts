@@ -11,6 +11,6 @@ export class historyScene extends Scene {
     }
     
     onInitialize(engine: Engine<any>): void {
-        this.backgroundColor = Color.Red
+        this.backgroundColor = Color.Gray
     }
 }
