@@ -13,7 +13,7 @@ game.addScene("bemvindo", new welcomeScene())
 game.addScene("historia", new historyScene())
 
 game.start(loader).then(() => {
-  game.goToScene("bemvindo", {
+  game.goToScene("historia", {
     // Adiciona transição lenta ao ir para a welcomeScene
     sourceOut: new FadeInOut({ duration: 1000 })
   })
