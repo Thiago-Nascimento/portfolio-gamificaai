@@ -5,12 +5,16 @@ body {
 }
 
 .container-game {
-  height: 800px;
   width: 1200px;
+  height: 800px;
+
+  margin: 20px auto;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
 }
 
 .sobre-gamifica{
