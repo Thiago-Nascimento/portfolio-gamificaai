@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="29" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="29" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="19">
  <tileset firstgid="1" source="tileset_paredes.tsx"/>
  <tileset firstgid="8285" source="tileset_generic.tsx"/>
  <tileset firstgid="9533" source="tileset_estoque.tsx"/>
@@ -53,6 +53,20 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="10" name="Personagens">
+  <object id="15" name="player_spawn" x="464.667" y="497.333">
+   <point/>
+  </object>
+  <object id="16" name="npc_a" x="239.818" y="221.818">
+   <point/>
+  </object>
+  <object id="17" name="npc_b" x="463.455" y="222">
+   <point/>
+  </object>
+  <object id="18" name="npc_c" x="687.455" y="222.182">
+   <point/>
+  </object>
+ </objectgroup>
  <layer id="3" name="Paredes" width="29" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -149,6 +163,21 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="9" name="ObjetosColisores">
+  <object id="1" name="mesa_tenis" x="686" y="364.875" width="66.125" height="96.75"/>
+  <object id="3" name="mesa_stand_a" x="202" y="240.364" width="76" height="41.2727"/>
+  <object id="4" name="mesa_stand_b" x="426.333" y="239.697" width="76" height="41.2727"/>
+  <object id="5" name="mesa_stand_c" x="650" y="239.697" width="76" height="41.2727"/>
+  <object id="6" name="vaso_planta" x="102.333" y="120" width="19.3333" height="21.3333"/>
+  <object id="7" name="vaso_planta" x="806.333" y="120" width="19.3333" height="21.3333"/>
+  <object id="8" name="gavetas_stand" x="735.879" y="237.455" width="31.8788" height="38.606"/>
+  <object id="9" name="gavetas_stand" x="512.102" y="237.364" width="31.8788" height="38.606"/>
+  <object id="10" name="gavetas_stand" x="288.061" y="237.197" width="31.8788" height="38.606"/>
+  <object id="11" name="pc_stand" x="137.879" y="233.742" width="43.8788" height="50.0605"/>
+  <object id="12" name="pc_stand" x="362.061" y="233.47" width="43.8788" height="50.0605"/>
+  <object id="13" name="pc_stand" x="586.061" y="232.97" width="43.8788" height="50.0605"/>
+  <object id="14" name="mesa_tv" x="99.6061" y="359.197" width="20.6061" height="48.9696"/>
+ </objectgroup>
  <layer id="7" name="Teto" width="29" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
