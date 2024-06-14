@@ -1,11 +1,14 @@
-import { Actor, Animation, CollisionType, Color, Engine, Keys, SpriteSheet, Vector, vec } from "excalibur";
+import { Actor, Animation, Collider, CollisionContact, CollisionType, Color, Engine, Keys, Side, SpriteSheet, Vector, vec } from "excalibur";
 import { Resources } from "../resources";
 
 export class Player extends Actor {
     // Propriedades do player
     private velocidade: number = 180
-    private ultimaDirecao: string = "down"    
-    
+    private ultimaDirecao: string = "down"
+
+    private temObjetoProximo: boolean = false
+    private ultimoColisor?: Collider
+
     // Configuração do Player
     constructor(posicao: Vector) {
         super({
@@ -30,14 +33,14 @@ export class Player extends Actor {
             },
             spacing: {
                 originOffset: {
-                    y: 4            // 8
+                    y: 3            // 8
                 }
             }
         })
 
         // Criar as animações
         const duracaoFrameAnimacao = 70
-        
+
         // Animações Idle
         // Idle Esquerda
         const leftIdle = new Animation({
@@ -144,8 +147,8 @@ export class Player extends Actor {
         })
         this.graphics.add("up-walk", upWalk)
 
-         // Andar para baixo
-         const downWalk = new Animation({
+        // Andar para baixo
+        const downWalk = new Animation({
             frames: [
                 { graphic: playerSpriteSheet.getSprite(18, 2) },
                 { graphic: playerSpriteSheet.getSprite(19, 2) },
@@ -174,6 +177,9 @@ export class Player extends Actor {
                     this.graphics.use("left-walk")
                     this.graphics.current!.scale = vec(1.7, 1.7)
 
+                    // Guardar ultima direção
+                    this.ultimaDirecao = "left"
+
                     break;
 
                 case Keys.Right:
@@ -182,9 +188,12 @@ export class Player extends Actor {
                     // Define a velocidade x para positiva, que significa movimentar o player para a direita
                     this.vel.x = this.velocidade
 
-                     // Definir animação
-                     this.graphics.use("right-walk")
-                     this.graphics.current!.scale = vec(1.7, 1.7)
+                    // Definir animação
+                    this.graphics.use("right-walk")
+                    this.graphics.current!.scale = vec(1.7, 1.7)
+
+                    // Guardar ultima direção
+                    this.ultimaDirecao = "right"
 
                     break;
 
@@ -194,9 +203,12 @@ export class Player extends Actor {
                     // Define a velocidade y para negativa, que significa movimentar o player para cima
                     this.vel.y = -this.velocidade
 
-                     // Definir animação
-                     this.graphics.use("up-walk")
-                     this.graphics.current!.scale = vec(1.7, 1.7)
+                    // Definir animação
+                    this.graphics.use("up-walk")
+                    this.graphics.current!.scale = vec(1.7, 1.7)
+
+                    // Guardar ultima direção
+                    this.ultimaDirecao = "up"
 
                     break;
 
@@ -206,9 +218,12 @@ export class Player extends Actor {
                     // Define a velocidade y para positiva, que significa movimentar o player para baixo
                     this.vel.y = this.velocidade
 
-                     // Definir animação
-                     this.graphics.use("down-walk")
-                     this.graphics.current!.scale = vec(1.7, 1.7)
+                    // Definir animação
+                    this.graphics.use("down-walk")
+                    this.graphics.current!.scale = vec(1.7, 1.7)
+
+                    // Guardar ultima direção
+                    this.ultimaDirecao = "down"
 
                     break;
 
@@ -245,9 +260,37 @@ export class Player extends Actor {
                 // Zerar velocidade vertical
                 this.vel.y = 0
             }
+
+            // Ao parar o player, definir animação idle da ultima direção
+            if (this.vel.x == 0 && this.vel.y == 0) {
+                // ultimaDirecao - left, right, up, down
+                // Colar a ultimaDirecao + -idle -> ex. left-idle, right-idle, up-idle 
+                this.graphics.use(this.ultimaDirecao + "-idle")
+                this.graphics.current!.scale = vec(1.6, 1.6)
+            }
+
         })
     }
 
+    onPreCollisionResolve(self: Collider, other: Collider, side: Side, contact: CollisionContact): void {
+        // Indicar que tem um objeto proximo
+        this.temObjetoProximo = true
+
+        // Registrar o ultimo objeto colidido
+        this.ultimoColisor = other
+    }
+
+    onPreUpdate(engine: Engine<any>, delta: number): void {
+        // Detectar se o player está distante do ultimo objeto colidido
+        if (this.ultimoColisor && this.pos.distance(this.ultimoColisor.worldPos) > 40) {
+            // Marcar que o objeto não está próximo
+            this.temObjetoProximo = false
+
+            console.log("Está longe");            
+        }
+    }
     
+
+
 
 }
