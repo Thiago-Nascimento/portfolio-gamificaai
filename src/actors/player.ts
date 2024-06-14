@@ -4,17 +4,17 @@ import { Resources } from "../resources";
 export class Player extends Actor {
     // Propriedades do player
     private velocidade: number = 180
-    
+    private ultimaDirecao: string = "down"    
     
     // Configuração do Player
     constructor(posicao: Vector) {
         super({
             pos: posicao,
-            width: 32,
-            height: 32,
+            width: 32,  // 35
+            height: 32, // 50
             name: "Jogador",
             color: Color.Red,
-            collisionType: CollisionType.Active
+            collisionType: CollisionType.Active,
         })
     }
 
@@ -99,7 +99,7 @@ export class Player extends Actor {
         this.graphics.use("down-idle")
 
         // Definir zoom
-        this.graphics.current!.scale = vec(1.6, 1.6)
+        this.graphics.current!.scale = vec(1.7, 1.7)
 
         // Animações Walk
         // Andar para esquerda
@@ -116,6 +116,48 @@ export class Player extends Actor {
         })
         this.graphics.add("left-walk", leftWalk)
 
+        // Andar para direita
+        const rightWalk = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(0, 2) },
+                { graphic: playerSpriteSheet.getSprite(1, 2) },
+                { graphic: playerSpriteSheet.getSprite(2, 2) },
+                { graphic: playerSpriteSheet.getSprite(3, 2) },
+                { graphic: playerSpriteSheet.getSprite(4, 2) },
+                { graphic: playerSpriteSheet.getSprite(5, 2) },
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("right-walk", rightWalk)
+
+        // Andar para cima
+        const upWalk = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(6, 2) },
+                { graphic: playerSpriteSheet.getSprite(7, 2) },
+                { graphic: playerSpriteSheet.getSprite(8, 2) },
+                { graphic: playerSpriteSheet.getSprite(9, 2) },
+                { graphic: playerSpriteSheet.getSprite(10, 2) },
+                { graphic: playerSpriteSheet.getSprite(11, 2) },
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("up-walk", upWalk)
+
+         // Andar para baixo
+         const downWalk = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(18, 2) },
+                { graphic: playerSpriteSheet.getSprite(19, 2) },
+                { graphic: playerSpriteSheet.getSprite(20, 2) },
+                { graphic: playerSpriteSheet.getSprite(21, 2) },
+                { graphic: playerSpriteSheet.getSprite(22, 2) },
+                { graphic: playerSpriteSheet.getSprite(23, 2) },
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("down-walk", downWalk)
+
 
 
         // Configurar player para monitorar evento "hold" -> segurar tecla
@@ -127,6 +169,11 @@ export class Player extends Actor {
                     // Mover para esquerda
                     // Define a velocidade x para negativa, que significa movimentar o player para a esquerda
                     this.vel.x = -this.velocidade
+
+                    // Definir animação
+                    this.graphics.use("left-walk")
+                    this.graphics.current!.scale = vec(1.7, 1.7)
+
                     break;
 
                 case Keys.Right:
@@ -134,6 +181,11 @@ export class Player extends Actor {
                     // Mover para direita
                     // Define a velocidade x para positiva, que significa movimentar o player para a direita
                     this.vel.x = this.velocidade
+
+                     // Definir animação
+                     this.graphics.use("right-walk")
+                     this.graphics.current!.scale = vec(1.7, 1.7)
+
                     break;
 
                 case Keys.Up:
@@ -141,6 +193,11 @@ export class Player extends Actor {
                     // Mover para cima
                     // Define a velocidade y para negativa, que significa movimentar o player para cima
                     this.vel.y = -this.velocidade
+
+                     // Definir animação
+                     this.graphics.use("up-walk")
+                     this.graphics.current!.scale = vec(1.7, 1.7)
+
                     break;
 
                 case Keys.Down:
@@ -148,6 +205,11 @@ export class Player extends Actor {
                     // Mover para baixo
                     // Define a velocidade y para positiva, que significa movimentar o player para baixo
                     this.vel.y = this.velocidade
+
+                     // Definir animação
+                     this.graphics.use("down-walk")
+                     this.graphics.current!.scale = vec(1.7, 1.7)
+
                     break;
 
                 default:
