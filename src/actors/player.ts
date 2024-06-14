@@ -53,7 +53,69 @@ export class Player extends Actor {
         })
         this.graphics.add("left-idle", leftIdle)
 
-        this.graphics.use("left-idle")
+        // Idle Direita
+        const rightIdle = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(0, 1) },
+                { graphic: playerSpriteSheet.getSprite(1, 1) },
+                { graphic: playerSpriteSheet.getSprite(2, 1) },
+                { graphic: playerSpriteSheet.getSprite(3, 1) },
+                { graphic: playerSpriteSheet.getSprite(4, 1) },
+                { graphic: playerSpriteSheet.getSprite(5, 1) },
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("right-idle", rightIdle)
+
+        // Idle Cima
+        const upIdle = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(6, 1) },
+                { graphic: playerSpriteSheet.getSprite(7, 1) },
+                { graphic: playerSpriteSheet.getSprite(8, 1) },
+                { graphic: playerSpriteSheet.getSprite(9, 1) },
+                { graphic: playerSpriteSheet.getSprite(10, 1) },
+                { graphic: playerSpriteSheet.getSprite(11, 1) }
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("up-idle", upIdle)
+
+        // Idle Baixo
+        const downIdle = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(18, 1) },
+                { graphic: playerSpriteSheet.getSprite(19, 1) },
+                { graphic: playerSpriteSheet.getSprite(20, 1) },
+                { graphic: playerSpriteSheet.getSprite(21, 1) },
+                { graphic: playerSpriteSheet.getSprite(22, 1) },
+                { graphic: playerSpriteSheet.getSprite(23, 1) }
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("down-idle", downIdle)
+
+        // Definir animação inicial do Player
+        this.graphics.use("down-idle")
+
+        // Definir zoom
+        this.graphics.current!.scale = vec(1.6, 1.6)
+
+        // Animações Walk
+        // Andar para esquerda
+        const leftWalk = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(12, 2) },
+                { graphic: playerSpriteSheet.getSprite(13, 2) },
+                { graphic: playerSpriteSheet.getSprite(14, 2) },
+                { graphic: playerSpriteSheet.getSprite(15, 2) },
+                { graphic: playerSpriteSheet.getSprite(16, 2) },
+                { graphic: playerSpriteSheet.getSprite(17, 2) },
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("left-walk", leftWalk)
+
 
 
         // Configurar player para monitorar evento "hold" -> segurar tecla
