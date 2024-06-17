@@ -161,8 +161,6 @@ export class Player extends Actor {
         })
         this.graphics.add("down-walk", downWalk)
 
-
-
         // Configurar player para monitorar evento "hold" -> segurar tecla
         engine.input.keyboard.on("hold", (event) => {
             // Detectar qual tecla está pressionada
@@ -270,6 +268,41 @@ export class Player extends Actor {
             }
 
         })
+
+        // Configura o player para monitorar evento "press" -> pressionar
+        engine.input.keyboard.on("press", (event) => {
+            // Se a tecla pressionada for a F e tiver objeto próximo
+            if (event.key == Keys.F && this.temObjetoProximo) {
+                
+                // Identificar o alvo da interação
+                if (this.ultimoColisor?.owner.name == "mesa_stand_a") {
+                    console.log("Essa é a mesa A");
+
+                    // Vai para a cena passando qual o objeto da interação
+                    engine.goToScene("case", {
+                        sceneActivationData: {
+                            // Passa o nome do Actor que interagiu com o Player
+                            nomeDoActor: this.ultimoColisor?.owner.name
+                        }
+                    })
+                }
+                
+                if (this.ultimoColisor?.owner.name == "mesa_stand_b") {
+                    console.log("Essa é a mesa B");
+                    
+                }
+                
+                if (this.ultimoColisor?.owner.name == "mesa_stand_c") {
+                    console.log("Essa é a mesa C");
+                    
+                }
+                
+                
+
+            }
+
+
+        })
     }
 
     onPreCollisionResolve(self: Collider, other: Collider, side: Side, contact: CollisionContact): void {
@@ -286,11 +319,9 @@ export class Player extends Actor {
             // Marcar que o objeto não está próximo
             this.temObjetoProximo = false
 
-            console.log("Está longe");            
+            // console.log("Está longe");            
         }
     }
-    
-
 
 
 }
