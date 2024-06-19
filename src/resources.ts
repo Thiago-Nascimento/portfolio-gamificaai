@@ -1,4 +1,4 @@
-import { ImageFiltering, ImageSource, Loader } from "excalibur";
+import { ImageFiltering, ImageSource, Loader, Sound } from "excalibur";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 import sword from "./images/sword.png";
@@ -16,11 +16,23 @@ import tmxMapaPath from "./maps/showroom_map.tmx?url"
 
 import playerSpritePath from "./sprites/thiago.png"
 
+import ritmada from "./sounds/ritmada_zelda.mp3";
+import classico from "./sounds/zelda.mp3"
+
+import logoFast from "./images/fastmart.png"
+import logoXYZ from "./images/logoxyz.png"
+import logoABC from "./images/logoabcfinance.png"
+
 export const Resources = {
   Sword: new ImageSource(sword),
   Logo: new ImageSource(logo),
   PlayerSpriteSheet: new ImageSource(playerSpritePath, { filtering: ImageFiltering.Pixel }),
   LogoVertical: new ImageSource(logoVertical),
+  RitmadaBGM: new Sound(ritmada),
+  ClassicBGM: new Sound(classico),
+  LogoFastMart: new ImageSource(logoFast),
+  LogoXYZ: new ImageSource(logoXYZ),
+  LogoABC: new ImageSource(logoABC),  
   Mapa: new TiledResource(tmxMapaPath, {
     pathMap: [
       { path: "showroom_map.tmx", output: tmxMapaPath },
