@@ -15,6 +15,9 @@ import tsxBibliotecaPath from "./maps/tileset_biblioteca.tsx?url"
 import tmxMapaPath from "./maps/showroom_map.tmx?url"
 
 import playerSpritePath from "./sprites/thiago.png"
+import npcASpriteSheet from "./sprites/npcA.png"
+import npcBSpriteSheet from "./sprites/npcB.png"
+import npcCSpriteSheet from "./sprites/npcC.png"
 
 import ritmada from "./sounds/ritmada_zelda.mp3";
 import classico from "./sounds/zelda.mp3"
@@ -32,7 +35,12 @@ export const Resources = {
   ClassicBGM: new Sound(classico),
   LogoFastMart: new ImageSource(logoFast),
   LogoXYZ: new ImageSource(logoXYZ),
-  LogoABC: new ImageSource(logoABC),  
+  LogoABC: new ImageSource(logoABC),
+   
+  NpcASpriteSheet: new ImageSource(npcASpriteSheet, { filtering: ImageFiltering.Pixel }),
+  NpcBSpriteSheet: new ImageSource(npcBSpriteSheet, { filtering: ImageFiltering.Pixel }),
+  NpcCSpriteSheet: new ImageSource(npcCSpriteSheet, { filtering: ImageFiltering.Pixel }),
+
   Mapa: new TiledResource(tmxMapaPath, {
     pathMap: [
       { path: "showroom_map.tmx", output: tmxMapaPath },
